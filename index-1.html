@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>8 Alive ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: #fff8fb;
+      color: #30242b;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --pink: #f3a6c2;
+      --hot: #ff6fa8;
+      --soft: #ffe5ef;
+      --black: #0d0b0e;
+      --cream: #fff8fb;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 18px 7%;
+      background: rgba(13, 11, 14, 0.94);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .logo {
+      color: var(--pink);
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--pink);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      background: var(--black);
+      color: white;
+      padding: 150px 7% 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .small-title {
+      color: var(--pink);
+      letter-spacing: 4px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(60px, 10vw, 120px);
+      line-height: 0.9;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--pink);
+      font-style: italic;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #ddd;
+      max-width: 500px;
+    }
+
+    .hero-photo {
+      width: 45%;
+      max-width: 550px;
+      padding: 12px;
+      background: var(--pink);
+      transform: rotate(2deg);
+      box-shadow: 15px 15px 0 rgba(255, 111, 168, 0.2);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      display: block;
+    }
+
+    /* GENERAL */
+
+    section {
+      padding: 100px 7%;
+    }
+
+    .section-label {
+      color: var(--hot);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 5vw, 65px);
+      margin-bottom: 30px;
+    }
+
+    /* STORY */
+
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .story-text {
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .story-note {
+      background: var(--soft);
+      padding: 45px;
+      border-radius: 20px;
+      transform: rotate(-2deg);
+      box-shadow: 8px 8px 0 var(--pink);
+    }
+
+    .story-note h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    /* MEET THE 8 */
+
+    .dark-section {
+      background: var(--black);
+      color: white;
+    }
+
+    .friends-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .friend-card {
+      background: #171318;
+      border: 1px solid #3a3037;
+      padding: 18px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+
+    .friend-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--pink);
+    }
+
+    .friend-card .number {
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .friend-card h3 {
+      margin: 12px 0 5px;
+      color: var(--pink);
+      font-family: "Playfair Display", serif;
+      font-size: 25px;
+    }
+
+    .friend-card p {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    /* ENERGY */
+
+    .energy {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .energy-box {
+      background: var(--pink);
+      padding: 45px;
+      border-radius: 25px;
+    }
+
+    .energy-box h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 45px;
+      margin-bottom: 30px;
+    }
+
+    .energy-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .energy-item h3 {
+      margin-bottom: 7px;
+    }
+
+    .energy-item p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .quote-box {
+      background: var(--black);
+      color: white;
+      border-radius: 25px;
+      padding: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .quote-box p {
+      font-family: "Playfair Display", serif;
+      font-size: 38px;
+      line-height: 1.3;
+      color: var(--pink);
+    }
+
+    /* LEGENDARY MOMENT */
+
+    .legendary {
+      background: #fff0f6;
+      text-align: center;
+    }
+
+    .legendary-card {
+      max-width: 850px;
+      margin: 40px auto 0;
+      background: white;
+      padding: 50px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      border: 2px dashed var(--pink);
+    }
+
+    .legendary-card h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 38px;
+      margin-bottom: 25px;
+    }
+
+    .legendary-card p {
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .legendary-card strong {
+      color: var(--hot);
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .timeline-item {
+      border-left: 3px solid var(--pink);
+      padding: 10px 0 35px 30px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      background: var(--hot);
+      border-radius: 50%;
+      position: absolute;
+      left: -8px;
+      top: 10px;
+    }
+
+    .timeline-item h3 {
+      color: var(--hot);
+      margin-bottom: 8px;
+    }
+
+    .timeline-item p {
+      line-height: 1.6;
+    }
+
+    /* GALLERY */
+
+    .gallery {
+      background: var(--black);
+      color: white;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .memory {
+      min-height: 220px;
+      background: #181419;
+      border: 1px dashed #6b5660;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #aaa;
+      overflow: hidden;
+    }
+
+    .memory img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      object-fit: cover;
+    }
+
+    .add-memory {
+      color: var(--pink);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* MUSIC */
+
+    .music-button {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--hot);
+      color: white;
+      border: none;
+      padding: 15px 22px;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      z-index: 999;
+    }
+
+    .music-button:hover {
+      transform: scale(1.05);
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: var(--black);
+      color: white;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    footer h2 {
+      color: var(--pink);
+      font-family: "Playfair Display", serif;
+      font-size: 55px;
+    }
+
+    footer p {
+      color: #aaa;
+      margin-top: 10px;
+      letter-spacing: 2px;
+      font-size: 12px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      nav a {
+        display: none;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 130px;
+      }
+
+      .hero-photo {
+        width: 100%;
+      }
+
+      .hero p {
+        margin: auto;
+      }
+
+      .story,
+      .energy {
+        grid-template-columns: 1fr;
+      }
+
+      .friends-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .energy-items {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      section {
+        padding: 75px 5%;
+      }
+
+      .friends-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .legendary-card {
+        padding: 30px 20px;
+      }
+
+      .quote-box p {
+        font-size: 30px;
+      }
+
+      footer h2 {
+        font-size: 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <div class="logo">8 Alive ♡</div>
+
+    <div>
+      <a href="#story">Our Story</a>
+      <a href="#friends">Meet the 8</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#memories">Memories</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-text">
+
+      <div class="small-title">
+        EIGHT GIRLS • ONE FRIENDSHIP
+      </div>
+
+      <h1>
+        8 <span>Alive</span>
+      </h1>
+
+      <p>
+        8 girls. 1 friendship. Almost 3 years of memories,
+        laughter, chaos, and moments we'll never forget. ♡
+      </p>
+
+    </div>
+
+    <div class="hero-photo">
+      <!-- Put your original photo in the same folder and name it friends.JPG -->
+      <img src="friends.JPG" alt="8 Alive">
+    </div>
+
+  </section>
+
+
+  <!-- OUR STORY -->
+
+  <section id="story">
+
+    <div class="story">
+
+      <div>
+
+        <div class="section-label">OUR STORY</div>
+
+        <h2 class="section-title">
+          How it all began ♡
+        </h2>
+
+        <p class="story-text">
+          We met at university — just a group of girls with
+          different personalities, different dreams, and no idea
+          that we would become this close.
+          <br><br>
+
+          What started as casual conversations turned into
+          deep talks, endless laughter, inside jokes and
+          memories that have lasted almost three years.
+          <br><br>
+
+          Through university stress, good days, bad days and
+          everything in between, we chose each other.
+        </p>
+
+      </div>
+
+      <div class="story-note">
+
+        <h3>
+          Different girls.<br>
+          Same heart. ♡
+        </h3>
+
+        <p>
+          8 Alive isn't just a group of friends.
+          It's our little world, full of laughter,
+          chaos, love and memories.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MEET THE 8 -->
+
+  <section class="dark-section" id="friends">
+
+    <div class="section-label">
+      MEET THE 8
+    </div>
+
+    <h2 class="section-title">
+      Different vibes. Same love. ♡
+    </h2>
+
+    <div class="friends-grid">
+
+      <div class="friend-card">
+        <div class="number">01</div>
+        <h3>Asma’a</h3>
+        <p>Cool • Calm • Cute ♡</p>
+      </div>
+
+      <div class="friend-card">
+        <div class="number">02</div>
+        <h3>Fareeda</h3>
+        <p>Funny • Weird • Sweet ♡</p>
+      </div>
+
+      <div class="friend-card">
+        <div class="number">03</div>
+        <h3>Waleeda</h3>
+        <p>Awesome • Honest • Kind ♡</p>
+      </div>
+
+      <div class="friend-card">
+        <div class="number">04</div>
+        <h3>Maryam</h3>
+        <p>Kind • Sassy • Amazing ♡</p>
+      </div>
+
+      <div class="friend-card">
+        <div class="number">05</div>
+        <h3>Fatima</h3>
+        <p>Quiet • Kind • Lovable ♡</p>
+      </div>
+
+      <div class="friend-card">
+        <div class="number">06</div>
+        <h3>Haleema</h3>
+        <p>Kind • Generous • Pretty ♡</p>
+      </div>
+
+      <div class="friend-card">
+        <div class="number">07</div>
+        <h3>Iman</h3>
+        <p>Weird • Sweet • Kind ♡</p>
+      </div>
+
+      <div class="friend-card">
+        <div class="number">08</div>
+        <h3>Zainab</h3>
+        <p>Cool • Funny • Sweet ♡</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ENERGY -->
+
+  <section>
+
+    <div class="energy">
+
+      <div class="energy-box">
+
+        <h2>
+          The 8 Alive Energy ♡
+        </h2>
+
+        <div class="energy-items">
+
+          <div class="energy-item">
+            <h3>😂 Uncontrollable Laughter</h3>
+            <p>
+              One joke and we're already crying.
+            </p>
+          </div>
+
+          <div class="energy-item">
+            <h3>👑 Always Serving</h3>
+            <p>
+              Pretty girls, big dreams and teamwork.
+            </p>
+          </div>
+
+          <div class="energy-item">
+            <h3>💬 Inside Jokes</h3>
+            <p>
+              Things that make absolutely no sense
+              to outsiders.
+            </p>
+          </div>
+
+          <div class="energy-item">
+            <h3>♡ Always There</h3>
+            <p>
+              Through the good, bad and everything
+              in between.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="quote-box">
+
+        <p>
+          “We didn't just find friends.
+          We found our people.”
+          <br><br>
+          <small>— 8 Alive ♡</small>
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LEGENDARY MOMENT -->
+
+  <section class="legendary">
+
+    <div class="section-label">
+      LEGENDARY MOMENT
+    </div>
+
+    <h2 class="section-title">
+      The Tree Branch Incident 🌳
+    </h2>
+
+    <div class="legendary-card">
+
+      <h2>
+        One branch. Eight suspects. 😭
+      </h2>
+
+      <p>
+        <strong>
+          One of us broke a tree branch…
+          and suddenly, all of us were facing expulsion threats. 😭
+        </strong>
+        <br><br>
+
+        Our ID cards were taken, and we were told to bring
+        <strong>two pots of flowers each</strong>
+        as compensation for the damage. 🌸
+        <br><br>
+
+        What started as a tiny tree-branch incident somehow
+        became one of the most unforgettable chapters in
+        <strong>8 Alive history.</strong> 😂🌳
+        <br><br>
+
+        <strong>
+          We survived. The tree did not. 😭💀
+        </strong>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- TIMELINE -->
+
+  <section id="timeline">
+
+    <div class="section-label">
+      OUR TIMELINE
+    </div>
+
+    <h2 class="section-title">
+      The best almost 3 years so far... ♡
+    </h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h3>Year 1 — We Met</h3>
+        <p>
+          University introduced us.
+          The chaos officially began. 😂
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Year 2 — Inseparable</h3>
+        <p>
+          More inside jokes, more memories,
+          more reasons to laugh.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Year 3 — 8 Alive</h3>
+        <p>
+          Almost three years later,
+          and somehow we're still creating memories.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MEMORIES -->
+
+  <section class="gallery" id="memories">
+
+    <div class="section-label">
+      OUR MEMORIES
+    </div>
+
+    <h2 class="section-title">
+      Big moments. Little moments. All special. ♡
+    </h2>
+
+    <div class="gallery-grid">
+
+      <div class="memory">
+        <img src="friends.jpeg" alt="8 Alive memory">
+      </div>
+
+      <div class="memory">
+        <div class="add-memory">
+          +<br>
+          Add more memories<br>
+          ♡
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="add-memory">
+          ♡<br>
+          More moments<br>
+          ♡
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="add-memory">
+          ✨<br>
+          More memories<br>
+          soon
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="add-memory">
+          📸<br>
+          Another memory<br>
+          ♡
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="add-memory">
+          💕<br>
+          Forever & Always
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MUSIC BUTTON -->
+
+  <button class="music-button" onclick="playMusic()">
+    ♫ Oh No — Rema
+  </button>
+
+  <!-- 
+    To play the actual song, put your legally obtained audio file
+    in the same folder and name it "oh-no.mp3".
+  -->
+
+  <audio id="music">
+    <source src="oh-no.mp3" type="audio/mpeg">
+  </audio>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <h2>
+      8 Alive ♡
+    </h2>
+
+    <p>
+      EIGHT GIRLS. ONE STORY. FOREVER.
+    </p>
+
+    <p>
+      ♫ Oh No — Rema
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    function playMusic() {
+
+      const music = document.getElementById("music");
+
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
